@@ -1,0 +1,29 @@
+﻿
+[
+	{
+		"profilename":	"Game1",
+
+		"builds":
+		[
+			{
+				"platform":			"windows",
+				"folder":			"d:/games/game1/win"
+			},
+			{
+				"platform":			"linux",
+				"folder":			"d:/games/game1/linux"
+			}
+		]
+	},
+	{
+		"profilename":	"Game2",
+
+		"builds":
+		[
+			{
+				"platform":			"windows",
+				"folder":			"d:/games/game2/win"
+			}
+		]
+	}
+]
