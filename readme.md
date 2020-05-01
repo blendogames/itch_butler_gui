@@ -11,7 +11,7 @@ This is written in C# and a .sln solution for Visual Studio 2010 is provided. Wi
 - Run Blendo itch uploader.
 
 ## License
-This source code is licensed under the zlib license. Read the license details here: [LICENSE.md](https://github.com/blendogames/blendo_itch_uploader/blob/master/license.md)
+This source code is licensed under the zlib license. Read the license details here: [LICENSE.md](https://github.com/blendogames/itch_butler_gui/blob/master/license.md)
 
 ## Credits
 by Brendon Chung
