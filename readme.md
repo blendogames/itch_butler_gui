@@ -17,5 +17,5 @@ This source code is licensed under the zlib license. Read the license details he
 by [Brendon Chung](http://blendogames.com)
 
 ## Libraries used
-[Butler](https://github.com/itchio/butler)
-[Json.NET](https://www.newtonsoft.com/json)
+- [Butler](https://github.com/itchio/butler)
+- [Json.NET](https://www.newtonsoft.com/json)
