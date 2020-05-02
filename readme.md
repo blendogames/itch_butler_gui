@@ -1,7 +1,7 @@
 ﻿# Blendo itch uploader
 
 ## About
-I decided to make a gui wrapper around itch.io's Butler command-line program, to streamline my build process.
+I made a gui wrapper around itch.io's Butler command-line program, to streamline my build process.
 
 This is written in C# and a .sln solution for Visual Studio 2010 is provided. Windows only.
 
@@ -14,4 +14,8 @@ This is written in C# and a .sln solution for Visual Studio 2010 is provided. Wi
 This source code is licensed under the zlib license. Read the license details here: [LICENSE.md](https://github.com/blendogames/itch_butler_gui/blob/master/license.md)
 
 ## Credits
-by Brendon Chung
+by [Brendon Chung](http://blendogames.com)
+
+## Libraries used
+[Butler](https://github.com/itchio/butler)
+[Json.NET](https://www.newtonsoft.com/json)
