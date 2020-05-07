@@ -98,12 +98,18 @@ namespace itch_butler_gui
             }
 
             dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(dataGridView1_CellValueChanged);
+            dataGridView1.LostFocus += new EventHandler(datagrid_LostFocus);
 
             //textBox_username.TextChanged += new EventHandler(textboxValuechanged);
             //textBox_gamename.TextChanged += new EventHandler(textboxValuechanged);
 
             textBox_gamename.LostFocus += new EventHandler(txtbox_LostFocus);
             textBox_username.LostFocus += new EventHandler(txtbox_LostFocus);
+        }
+
+        private void datagrid_LostFocus(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
         }
 
         private void txtbox_LostFocus(object sender, EventArgs e)
@@ -279,7 +285,7 @@ namespace itch_butler_gui
             }
 
             //Load the profiles json file.
-            AddLog(string.Format("Loading {0}", PROFILE_FILE));
+            //AddLog(string.Format("Loading {0}", PROFILE_FILE));
             
             try
             {
@@ -432,6 +438,8 @@ namespace itch_butler_gui
         private void button1_Click(object sender, EventArgs e)
         {
             listBox1.BackColor = Color.White;
+
+            dataGridView1.ClearSelection();
 
             if (string.IsNullOrWhiteSpace(textBox_username.Text))
             {

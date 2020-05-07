@@ -3,6 +3,8 @@
 ## About
 I made a gui wrapper around itch.io's Butler command-line program, to streamline my build process.
 
+[![screenshot of Blendo itch uploader](screenshot.png)](screenshot.png)
+
 This is written in C# and a .sln solution for Visual Studio 2010 is provided. Windows only.
 
 ## Installation
