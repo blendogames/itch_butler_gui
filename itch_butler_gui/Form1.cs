@@ -534,7 +534,7 @@ namespace itch_butler_gui
             AddLogInvoke(string.Format("Starting upload of '{0}' build:", dataGridView1.Rows[buildIndex].Cells[1].Value));
 
             //Generate the arguments.
-            string arguments = string.Format("push {0} {1}/{2}:{3} {4}", dataGridView1.Rows[buildIndex].Cells[2].Value, textBox_username.Text, textBox_gamename.Text, dataGridView1.Rows[buildIndex].Cells[1].Value, profiles[profileIndex].arguments);
+            string arguments = string.Format("push \"{0}\" {1}/{2}:{3} {4}", dataGridView1.Rows[buildIndex].Cells[2].Value, textBox_username.Text, textBox_gamename.Text, dataGridView1.Rows[buildIndex].Cells[1].Value, profiles[profileIndex].arguments);
             AddLogInvoke(arguments);
             AddLogInvoke(string.Empty);
 
