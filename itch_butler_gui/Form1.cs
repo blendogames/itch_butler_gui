@@ -954,16 +954,17 @@ namespace itch_butler_gui
         {
             Form prompt = new Form()
             {
-                Width = 500,
+                Width = 700,
                 Height = 150,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
             };
             Label textLabel = new Label() { Left = 10, Top = 20, Width=400, Text = text };
-            TextBox textBox = new TextBox() { Left = 10, Top = 50, Width = 460 };
+            TextBox textBox = new TextBox() { Left = 10, Top = 50, Width = 660 };
             textBox.Text = defaultText;
-            Button confirmation = new Button() { Text = "Ok", Left = 370, Width = 100, Top = 80, DialogResult = DialogResult.OK };
+            textBox.Font = new Font("Lucida Console", 10);
+            Button confirmation = new Button() { Text = "Ok", Left = 570, Width = 100, Top = 80, DialogResult = DialogResult.OK };
             confirmation.Click += (sender, e) => { prompt.Close(); };
             prompt.Controls.Add(textBox);
             prompt.Controls.Add(confirmation);
