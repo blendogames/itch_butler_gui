@@ -38,6 +38,9 @@ namespace itch_butler_gui
         [JsonProperty("folder")]
         public string folder { get; set; }
 
+        [JsonProperty("ignorefilters")]
+        public string ignorefilters { get; set; }
+
         public ProfileBuilds()
         {
         }

@@ -27,7 +27,7 @@ namespace itch_butler_gui
         const string PROFILE_FILE = "profiles.json";
         const string PROFILE_BACKUP = "profiles.backup";
         const string BUTLER_EXE = "butler.exe";
-        const string DEFAULT_ARGS = "--if-changed";
+        const string DEFAULT_ARGS = "";
 
         List<ProjectProfile> profiles;
         int lastSelectedIndex = -1;
@@ -44,11 +44,22 @@ namespace itch_butler_gui
 
             this.FormClosed += MyClosedHandler;
 
+            bool foundError = false;
+
+            if (!File.Exists(BUTLER_EXE))
+            {
+                AddLog(string.Format("Failed to find {0}. Please copy all Butler files into {1}", BUTLER_EXE, Environment.CurrentDirectory));
+                listBox1.BackColor = Color.Pink;
+                SetButtonsEnabled(false);
+
+                foundError = true;
+            }
+
             //Attempt to load profiles.
             if (!LoadProfiles(out profiles))
             {
                 listBox1.BackColor = Color.Pink;
-                AddLog("No profiles found. Go to: File > Add new profile");
+                AddLog("No profiles found. Please go to: File > Add new profile");
                 SetButtonsEnabled(true);
 
                 button1.Enabled = false;
@@ -59,18 +70,18 @@ namespace itch_butler_gui
                 addNewProjectProfileToolStripMenuItem.Enabled = true;
                 profileManagementToolStripMenuItem.Enabled = false;
 
+                foundError = true;
+            }            
+
+            if (foundError)
+            {
                 return;
             }
 
-            if (!File.Exists(BUTLER_EXE))
-            {
-                AddLog(string.Format("Failed to find {0}. Please copy all Butler files into {1}", BUTLER_EXE, Environment.CurrentDirectory));
-                listBox1.BackColor = Color.Pink;
-                SetButtonsEnabled(false);
-                return;
-            }
-            AddLog(string.Format("Found {0} profile{1}.", profiles.Count, profiles.Count > 1 ? "s" : string.Empty));
-            AddLog(string.Empty);
+
+
+            //AddLog(string.Format("Found {0} profile{1}.", profiles.Count, profiles.Count > 1 ? "s" : string.Empty));
+            //AddLog(string.Empty);
             AddLog("-- READY TO UPLOAD --");
 
             //Populate the profiles dropdown box.
@@ -154,6 +165,7 @@ namespace itch_butler_gui
                 ProfileBuilds newBuild = new ProfileBuilds();
                 newBuild.platform = dataGridView1.Rows[i].Cells[1].Value.ToString();
                 newBuild.folder = dataGridView1.Rows[i].Cells[2].Value.ToString();
+                newBuild.ignorefilters = dataGridView1.Rows[i].Cells[3].Value.ToString();
                 buildList.Add(newBuild);
             }
 
@@ -202,11 +214,11 @@ namespace itch_butler_gui
             }
         }
 
-
+        //This gets called when a profile is selected.
         private void ComboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (lastSelectedIndex == comboBox1.SelectedIndex)
-                return;
+                return; //If select same profile, then ignore.
 
             lastSelectedIndex = comboBox1.SelectedIndex;
 
@@ -220,7 +232,6 @@ namespace itch_butler_gui
                 textBox_gamename.Text = profiles[comboBox1.SelectedIndex].gamename;
             else
                 textBox_gamename.Text = string.Empty;
-
 
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -241,6 +252,7 @@ namespace itch_butler_gui
                 row.Cells[0].Value = true;
                 row.Cells[1].Value = profiles[comboBox1.SelectedIndex].builds[i].platform;
                 row.Cells[2].Value = profiles[comboBox1.SelectedIndex].builds[i].folder;
+                row.Cells[3].Value = profiles[comboBox1.SelectedIndex].builds[i].ignorefilters;
                 dataGridView1.Rows.Add(row);
             }
 
@@ -273,7 +285,7 @@ namespace itch_butler_gui
 
             if (!File.Exists(PROFILE_FILE))
             {
-                AddLog(string.Format("No {0} found.", PROFILE_FILE));
+                //AddLog(string.Format("No {0} found.", PROFILE_FILE));
                 return false;
             }
 
@@ -432,7 +444,41 @@ namespace itch_butler_gui
             if (profiles.Count <= 0)
             {
                 SetButtonsEnabled(false);
+
+                //Clear out the data grid.
+                dataGridView1.Rows.Clear();
             }
+        }
+
+        //Return TRUE if everything's fine.
+        private bool DoSanityCheck()
+        {
+            bool success = true;
+
+            if (string.IsNullOrWhiteSpace(textBox_username.Text))
+            {
+                AddLog("Error: username field is empty.");
+                success = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox_gamename.Text))
+            {
+                AddLog("Error: game name field is empty.");
+                success = false;
+            }
+
+            if (!File.Exists(BUTLER_EXE))
+            {
+                AddLog(string.Format("Error: failed to find {0}. Please copy all Butler files into {1}", BUTLER_EXE, Environment.CurrentDirectory));
+                success = false;
+            }
+
+            if (!success)
+            {
+                listBox1.BackColor = Color.Pink;
+            }
+
+            return success;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -441,19 +487,10 @@ namespace itch_butler_gui
 
             dataGridView1.ClearSelection();
 
-            if (string.IsNullOrWhiteSpace(textBox_username.Text))
+            if (!DoSanityCheck())
             {
-                AddLog("Error: username field is empty.");
-                listBox1.BackColor = Color.Pink;
                 return;
-            }
-
-            if (string.IsNullOrWhiteSpace(textBox_gamename.Text))
-            {
-                AddLog("Error: game name field is empty.");
-                listBox1.BackColor = Color.Pink;
-                return;
-            }
+            }            
 
             int platformCount = 0;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -533,8 +570,21 @@ namespace itch_butler_gui
             AddLogInvoke(string.Empty);
             AddLogInvoke(string.Format("Starting upload of '{0}' build:", dataGridView1.Rows[buildIndex].Cells[1].Value));
 
+            //Generate the ignore filter.
+            string ignoreFilter = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(dataGridView1.Rows[buildIndex].Cells[3].Value.ToString()))
+            {
+                string[] filters = dataGridView1.Rows[buildIndex].Cells[3].Value.ToString().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < filters.Length; i++)
+                {
+                    ignoreFilter += string.Format(" --ignore={0}", filters[i]);
+                }
+            }
+
             //Generate the arguments.
-            string arguments = string.Format("push \"{0}\" {1}/{2}:{3} {4}", dataGridView1.Rows[buildIndex].Cells[2].Value, textBox_username.Text, textBox_gamename.Text, dataGridView1.Rows[buildIndex].Cells[1].Value, profiles[profileIndex].arguments);
+            string arguments = string.Format("push \"{0}\" {1}/{2}:{3} {4} {5}", dataGridView1.Rows[buildIndex].Cells[2].Value, textBox_username.Text, textBox_gamename.Text, dataGridView1.Rows[buildIndex].Cells[1].Value, profiles[profileIndex].arguments, ignoreFilter);
             AddLogInvoke(arguments);
             AddLogInvoke(string.Empty);
 
@@ -799,7 +849,7 @@ namespace itch_butler_gui
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Blendo itch uploader\nby Brendon Chung\n\nThis is a graphical wrapper around Itch.io's Butler build manager. Use this program to upload projects to Itch.io.\n\nNotes:\n• Put all Butler files in the same folder as this program.\n• Common entries for the Platform field are: windows osx linux", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Blendo itch uploader\nby Brendon Chung\n\nThis is a graphical wrapper around Itch.io's Butler build manager. Use this program to upload projects to Itch.io.\n\nNotes:\n• Put all Butler files in the same folder as this program.\n• Common entries for the Platform field are: windows osx linux\n• Ignore filters allows you to not upload certain files. For example, *.txt will ignore all txt files. Use multiple filters by separating them with a space.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void changeCommandlineArgumentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -824,7 +874,15 @@ namespace itch_butler_gui
             promptValue = promptValue.Trim();
 
             profiles[comboBox1.SelectedIndex].arguments = promptValue;
-            AddLog(string.Format("Command line argument for '{0}' is now: {1}", currentProfilename, promptValue));
+
+            if (!string.IsNullOrWhiteSpace(promptValue))
+            {
+                AddLog(string.Format("Command-line argument for '{0}' is now: {1}", currentProfilename, promptValue));
+            }
+            else
+            {
+                AddLog("Command-line arguments is now empty.");
+            }
         }
 
         private void buildStatusToolStripMenuItem_Click(object sender, EventArgs e)
