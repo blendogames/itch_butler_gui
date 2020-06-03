@@ -16,8 +16,6 @@ using Newtonsoft.Json.Linq;
 
 //File > Save
 
-//remember last profile used, attempt to select it.
-
 //uploadtype: soundtrack, executable, etc
 
 namespace itch_butler_gui
@@ -27,6 +25,7 @@ namespace itch_butler_gui
         const string PROFILE_FILE = "profiles.json";
         const string PROFILE_BACKUP = "profiles.backup";
         const string BUTLER_EXE = "butler.exe";
+        const string BUTLER_URL = "https://fasterthanlime.itch.io/butler";
         const string DEFAULT_ARGS = "";
 
         List<ProjectProfile> profiles;
@@ -48,11 +47,14 @@ namespace itch_butler_gui
 
             if (!File.Exists(BUTLER_EXE))
             {
-                AddLog(string.Format("Failed to find {0}. Please copy all Butler files into {1}", BUTLER_EXE, Environment.CurrentDirectory));
+                AddLog(string.Format("Failed to find {0}. Please install Butler:", BUTLER_EXE, Environment.CurrentDirectory));
+                AddLog(string.Format("  1. Download Butler from {0}", BUTLER_URL));
+                AddLog(string.Format("  2. Put all Butler files into {0}", Environment.CurrentDirectory));
+                AddLog(string.Empty);
                 listBox1.BackColor = Color.Pink;
                 SetButtonsEnabled(false);
-
                 foundError = true;
+                Shown += Form1_Shown;
             }
 
             //Attempt to load profiles.
@@ -75,6 +77,7 @@ namespace itch_butler_gui
 
             if (foundError)
             {
+                //Popup box for butler download.
                 return;
             }
 
@@ -116,7 +119,29 @@ namespace itch_butler_gui
 
             textBox_gamename.LostFocus += new EventHandler(txtbox_LostFocus);
             textBox_username.LostFocus += new EventHandler(txtbox_LostFocus);
+
+            
         }
+
+
+        private void Form1_Shown(Object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Itch.io Butler is required to be installed in the same folder as this program. Would you like to open the Butler download page?\n\nhttps://fasterthanlime.itch.io/butler", "Blendo itch uploader", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                //Open up the Butler download page.
+                try
+                {
+                    Process.Start("https://fasterthanlime.itch.io/butler");
+                    AddLog("Blendo itch uploader");
+                }
+                catch (Exception err)
+                {
+                    AddLog(string.Format("Failed to open Butler download page. {0}", err.Message));
+                }
+            }
+        }
+
+
 
         private void datagrid_LostFocus(object sender, EventArgs e)
         {
