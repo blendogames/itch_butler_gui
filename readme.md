@@ -1,4 +1,5 @@
 ﻿# Blendo itch uploader
+[![Generic badge](https://img.shields.io/badge/Download-itch.io-red.svg)](https://blendogames.itch.io/blendo-itch-uploader) [![Donate](https://img.shields.io/badge/donate-$$$-brightgreen.svg)](https://blendogames.itch.io/blendo-itch-uploader/purchase)
 
 ## About
 I made a gui wrapper around itch.io's Butler command-line program, to streamline my build process.
