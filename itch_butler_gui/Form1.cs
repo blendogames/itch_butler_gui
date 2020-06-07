@@ -190,7 +190,20 @@ namespace itch_butler_gui
                 ProfileBuilds newBuild = new ProfileBuilds();
                 newBuild.platform = dataGridView1.Rows[i].Cells[1].Value.ToString();
                 newBuild.folder = dataGridView1.Rows[i].Cells[2].Value.ToString();
-                newBuild.ignorefilters = dataGridView1.Rows[i].Cells[3].Value.ToString();
+
+                if (dataGridView1.Rows[i].Cells[3].Value == null)
+                {
+                    newBuild.ignorefilters = string.Empty;
+                }
+                else if (string.IsNullOrWhiteSpace(dataGridView1.Rows[i].Cells[3].Value.ToString()))
+                {
+                    newBuild.ignorefilters = string.Empty;
+                }
+                else
+                {
+                    newBuild.ignorefilters = dataGridView1.Rows[i].Cells[3].Value.ToString();
+                }
+
                 buildList.Add(newBuild);
             }
 
