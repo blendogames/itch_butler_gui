@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,10 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ColumnCheckmark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLocalfolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,10 +69,6 @@
             this.textBox_gamename = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ColumnCheckmark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColumnPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLocalfolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -307,6 +308,40 @@
             this.dataGridView1.Size = new System.Drawing.Size(753, 135);
             this.dataGridView1.TabIndex = 100;
             // 
+            // ColumnCheckmark
+            // 
+            this.ColumnCheckmark.Frozen = true;
+            this.ColumnCheckmark.HeaderText = "Upload";
+            this.ColumnCheckmark.Name = "ColumnCheckmark";
+            this.ColumnCheckmark.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnCheckmark.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnCheckmark.ToolTipText = "Upload this build?";
+            this.ColumnCheckmark.Width = 60;
+            // 
+            // ColumnPlatform
+            // 
+            this.ColumnPlatform.Frozen = true;
+            this.ColumnPlatform.HeaderText = "Platform";
+            this.ColumnPlatform.Name = "ColumnPlatform";
+            this.ColumnPlatform.ToolTipText = "Common platforms: windows osx linux";
+            this.ColumnPlatform.Width = 80;
+            // 
+            // ColumnLocalfolder
+            // 
+            this.ColumnLocalfolder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnLocalfolder.FillWeight = 80F;
+            this.ColumnLocalfolder.HeaderText = "Local folder";
+            this.ColumnLocalfolder.Name = "ColumnLocalfolder";
+            this.ColumnLocalfolder.ToolTipText = "Local folder of the game build.";
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 20F;
+            this.Column1.HeaderText = "Ignore filters";
+            this.Column1.Name = "Column1";
+            this.Column1.ToolTipText = "Files to ignore. Separate by space. Can use wildcards, such as *.txt";
+            // 
             // listBox1
             // 
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -398,40 +433,6 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Project name:";
             // 
-            // ColumnCheckmark
-            // 
-            this.ColumnCheckmark.Frozen = true;
-            this.ColumnCheckmark.HeaderText = "Upload";
-            this.ColumnCheckmark.Name = "ColumnCheckmark";
-            this.ColumnCheckmark.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnCheckmark.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ColumnCheckmark.ToolTipText = "Upload this build?";
-            this.ColumnCheckmark.Width = 60;
-            // 
-            // ColumnPlatform
-            // 
-            this.ColumnPlatform.Frozen = true;
-            this.ColumnPlatform.HeaderText = "Platform";
-            this.ColumnPlatform.Name = "ColumnPlatform";
-            this.ColumnPlatform.ToolTipText = "Common platforms: windows osx linux";
-            this.ColumnPlatform.Width = 80;
-            // 
-            // ColumnLocalfolder
-            // 
-            this.ColumnLocalfolder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnLocalfolder.FillWeight = 80F;
-            this.ColumnLocalfolder.HeaderText = "Local folder";
-            this.ColumnLocalfolder.Name = "ColumnLocalfolder";
-            this.ColumnLocalfolder.ToolTipText = "Local folder of the game build.";
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.FillWeight = 20F;
-            this.Column1.HeaderText = "Ignore filters";
-            this.Column1.Name = "Column1";
-            this.Column1.ToolTipText = "Files to ignore. Separate by space. Can use wildcards, such as *.txt";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -446,6 +447,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "Form1";

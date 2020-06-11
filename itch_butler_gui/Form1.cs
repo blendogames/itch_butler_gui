@@ -141,8 +141,6 @@ namespace itch_butler_gui
             }
         }
 
-
-
         private void datagrid_LostFocus(object sender, EventArgs e)
         {
             dataGridView1.ClearSelection();
