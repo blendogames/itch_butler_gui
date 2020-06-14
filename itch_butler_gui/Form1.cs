@@ -609,13 +609,16 @@ namespace itch_butler_gui
             //Generate the ignore filter.
             string ignoreFilter = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(dataGridView1.Rows[buildIndex].Cells[3].Value.ToString()))
+            if (dataGridView1.Rows[buildIndex].Cells[3].Value != null)
             {
-                string[] filters = dataGridView1.Rows[buildIndex].Cells[3].Value.ToString().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                for (int i = 0; i < filters.Length; i++)
+                if (!string.IsNullOrWhiteSpace(dataGridView1.Rows[buildIndex].Cells[3].Value.ToString()))
                 {
-                    ignoreFilter += string.Format(" --ignore={0}", filters[i]);
+                    string[] filters = dataGridView1.Rows[buildIndex].Cells[3].Value.ToString().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    for (int i = 0; i < filters.Length; i++)
+                    {
+                        ignoreFilter += string.Format(" --ignore={0}", filters[i]);
+                    }
                 }
             }
 
