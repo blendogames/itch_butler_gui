@@ -816,11 +816,11 @@ namespace itch_butler_gui
             listBox1.BackColor = Color.White;
             AddLog(string.Empty);
             AddLog("-- BUTLER LOG OUT --");
-            AddLog("butler logout");
+            AddLog("butler logout --assume-yes");
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = BUTLER_EXE;
-            startInfo.Arguments = "logout";
+            startInfo.Arguments = "logout --assume-yes";
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
