@@ -37,6 +37,8 @@ namespace itch_butler_gui
         int buildIndex; //When iterating through all the builds for the upload process.
         int profileIndex; //Which profile to upload.
 
+
+
         public Form1()
         {
             InitializeComponent();
@@ -50,16 +52,17 @@ namespace itch_butler_gui
                 AddLog(string.Format("Failed to find {0}. Please install Butler:", BUTLER_EXE, Environment.CurrentDirectory));
                 AddLog(string.Format("  1. Download Butler from {0}", BUTLER_URL));
                 AddLog(string.Format("  2. Put all Butler files into {0}", Environment.CurrentDirectory));
+                AddLog(string.Format("  3. Close and restart this program."));
                 AddLog(string.Empty);
+
                 listBox1.BackColor = Color.Pink;
                 SetButtonsEnabled(false);
                 foundError = true;
                 Shown += Form1_Shown;
-            }
-
-            //Attempt to load profiles.
-            if (!LoadProfiles(out profiles))
+            }            
+            else if (!LoadProfiles(out profiles))
             {
+                //Attempt to load profiles.
                 listBox1.BackColor = Color.Pink;
                 AddLog("No profiles found. Please go to: File > Add new profile");
                 SetButtonsEnabled(true);
@@ -113,26 +116,24 @@ namespace itch_butler_gui
 
             dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(dataGridView1_CellValueChanged);
             dataGridView1.LostFocus += new EventHandler(datagrid_LostFocus);
-
-            //textBox_username.TextChanged += new EventHandler(textboxValuechanged);
-            //textBox_gamename.TextChanged += new EventHandler(textboxValuechanged);
-
             textBox_gamename.LostFocus += new EventHandler(txtbox_LostFocus);
             textBox_username.LostFocus += new EventHandler(txtbox_LostFocus);
 
-            
+            //textBox_username.TextChanged += new EventHandler(textboxValuechanged);
+            //textBox_gamename.TextChanged += new EventHandler(textboxValuechanged);
         }
+
+        
 
 
         private void Form1_Shown(Object sender, EventArgs e)
         {
-            if (MessageBox.Show("Itch.io Butler is required to be installed in the same folder as this program. Would you like to open the Butler download page?\n\nhttps://fasterthanlime.itch.io/butler", "Blendo itch uploader", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show(string.Format("Itch.io Butler is required to be copied into the same folder as this program.\n\nWould you like to open the Butler download page?\n{0}\n\n(You'll want to download: butler for windows 64-bit (stable))", BUTLER_URL), "Blendo itch uploader", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
                 //Open up the Butler download page.
                 try
                 {
-                    Process.Start("https://fasterthanlime.itch.io/butler");
-                    AddLog("Blendo itch uploader");
+                    Process.Start(BUTLER_URL);
                 }
                 catch (Exception err)
                 {
@@ -311,6 +312,12 @@ namespace itch_butler_gui
                 dataGridView1.DefaultCellStyle.BackColor = Color.DarkGray;
             else
                 dataGridView1.DefaultCellStyle.BackColor = Color.White;
+
+
+            dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(dataGridView1_CellValueChanged);
+            dataGridView1.LostFocus += new EventHandler(datagrid_LostFocus);
+            textBox_gamename.LostFocus += new EventHandler(txtbox_LostFocus);
+            textBox_username.LostFocus += new EventHandler(txtbox_LostFocus);
         }
 
         private bool LoadProfiles(out List<ProjectProfile> output)
@@ -344,6 +351,9 @@ namespace itch_butler_gui
                 AddLog(string.Format("Error: can't parse {0}. Error: {1}", PROFILE_FILE, e.Message));
                 return false;
             }
+
+            if (output == null)
+                return false;
 
             if (output.Count <= 0)
             {
@@ -428,6 +438,10 @@ namespace itch_butler_gui
             newProfile.arguments = DEFAULT_ARGS; //Default arguments.
             newProfile.gamename = string.Empty;
             newProfile.username = string.Empty;
+
+            if (profiles == null)
+                profiles = new List<ProjectProfile>();
+
             profiles.Add(newProfile);
 
             textBox_username.Text = string.Empty;
@@ -609,16 +623,13 @@ namespace itch_butler_gui
             //Generate the ignore filter.
             string ignoreFilter = string.Empty;
 
-            if (dataGridView1.Rows[buildIndex].Cells[3].Value != null)
+            if (!string.IsNullOrWhiteSpace(dataGridView1.Rows[buildIndex].Cells[3].Value.ToString()))
             {
-                if (!string.IsNullOrWhiteSpace(dataGridView1.Rows[buildIndex].Cells[3].Value.ToString()))
-                {
-                    string[] filters = dataGridView1.Rows[buildIndex].Cells[3].Value.ToString().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] filters = dataGridView1.Rows[buildIndex].Cells[3].Value.ToString().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    for (int i = 0; i < filters.Length; i++)
-                    {
-                        ignoreFilter += string.Format(" --ignore={0}", filters[i]);
-                    }
+                for (int i = 0; i < filters.Length; i++)
+                {
+                    ignoreFilter += string.Format(" --ignore={0}", filters[i]);
                 }
             }
 
@@ -816,11 +827,11 @@ namespace itch_butler_gui
             listBox1.BackColor = Color.White;
             AddLog(string.Empty);
             AddLog("-- BUTLER LOG OUT --");
-            AddLog("butler logout --assume-yes");
+            AddLog("butler logout");
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = BUTLER_EXE;
-            startInfo.Arguments = "logout --assume-yes";
+            startInfo.Arguments = "logout";
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
