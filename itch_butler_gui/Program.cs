@@ -15,7 +15,22 @@ namespace itch_butler_gui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+
+#if DEBUG
             Application.Run(new Form1());
+#else
+            try
+            {
+                Application.Run(new Form1());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(string.Format("Fatal error. Exiting now.\n\n{0}", e.ToString()));
+            }
+#endif
+
+
         }
     }
 }
