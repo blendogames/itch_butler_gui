@@ -64,7 +64,7 @@ namespace itch_butler_gui
             {
                 //Attempt to load profiles.
                 listBox1.BackColor = Color.Pink;
-                AddLog("No profiles found. Please go to: File > Add new profile");
+                AddLog("No game profiles found. Please go to: File > Add new game profile");
                 SetButtonsEnabled(true);
 
                 button1.Enabled = false;
@@ -410,13 +410,13 @@ namespace itch_butler_gui
             //Add new profile.
             listBox1.BackColor = Color.White;
 
-            string promptValue = Prompt.ShowDialog("What is the name of the new profile?", "New profile");
+            string promptValue = Prompt.ShowDialog("What is the name of your game?", "New game profile");
             promptValue = promptValue.Trim();
 
             if (string.IsNullOrWhiteSpace(promptValue))
             {
                 listBox1.BackColor = Color.Pink;
-                AddLog("Error: can't use empty profile name.");
+                AddLog("Error: can't use empty game profile name.");
                 return;
             }
 
@@ -428,7 +428,7 @@ namespace itch_butler_gui
                 if (string.Compare(comboboxText, promptValue, StringComparison.InvariantCultureIgnoreCase) == 0)
                 {
                     listBox1.BackColor = Color.Pink;
-                    AddLog(string.Format("Error: profile '{0}' already exists.", promptValue));
+                    AddLog(string.Format("Error: game profile '{0}' already exists.", promptValue));
                     return;
                 }
             }
@@ -451,7 +451,20 @@ namespace itch_butler_gui
             comboBox1.SelectedIndex = comboBox1.FindStringExact(promptValue);
 
             AddLog(string.Empty);
-            AddLog(string.Format("Added new profile: {0}", promptValue));
+            AddLog(string.Format("Added new game profile: {0}", promptValue));
+
+            AddLog(string.Empty);            
+            AddLog("============== NEXT STEPS ==============");
+            AddLog(string.Empty);
+            AddLog("Before uploading, make sure your project");
+            AddLog("exists in the itch.io dashboard.");
+            AddLog(string.Empty);
+            AddLog("If your project doesn't exist yet, go to:");
+            AddLog("https://itch.io/game/new");
+            AddLog(string.Empty);
+
+
+
             listBox1.BackColor = Color.White;
             SetButtonsEnabled(true);
         }
@@ -477,7 +490,7 @@ namespace itch_butler_gui
 
             if (comboBox1.SelectedIndex < 0)
             {
-                AddLog("Error: can't delete, no profile selected.");
+                AddLog("Error: can't delete, no game profile selected.");
                 return;
             }
 
@@ -489,11 +502,12 @@ namespace itch_butler_gui
             if (comboBox1.Items.Count > 0)
                 comboBox1.SelectedIndex = 0;
 
-            AddLog(string.Format("Deleted profile: {0}", profilename));
+            AddLog(string.Format("Deleted game profile: {0}", profilename));
 
             if (profiles.Count <= 0)
             {
                 SetButtonsEnabled(false);
+                addNewProjectProfileToolStripMenuItem.Enabled = true;
 
                 //Clear out the data grid.
                 dataGridView1.Rows.Clear();
@@ -902,7 +916,7 @@ namespace itch_butler_gui
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Blendo itch uploader\nby Brendon Chung\n\nThis is a graphical wrapper around Itch.io's Butler build manager. Use this program to upload projects to Itch.io.\n\nNotes:\n• Put all Butler files in the same folder as this program.\n• Common entries for the Platform field are: windows osx linux\n• Ignore filters allows you to not upload certain files. For example, *.txt will ignore all txt files. Use multiple filters by separating them with a space.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Blendo itch uploader\nby Brendon Chung\n\nsite: blendogames.itch.io/blendo-itch-uploader\nsource code: github.com/blendogames/itch_butler_gui\n\nThis is a graphical wrapper around Itch.io's Butler build manager. Use this program to upload projects to Itch.io.\n\nNotes:\n• Put all Butler files in the same folder as this program.\n• Common entries for the Platform field are: windows osx linux\n• Ignore filters allows you to not upload certain files. For example, *.txt will ignore all txt files. Use multiple filters by separating them with a space.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void changeCommandlineArgumentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -917,7 +931,7 @@ namespace itch_butler_gui
             if (comboBox1.SelectedIndex < 0)
             {
                 listBox1.BackColor = Color.Pink;
-                AddLog("Error: no profile selected.");
+                AddLog("Error: no game profile selected.");
                 return;
             }
 
@@ -945,7 +959,7 @@ namespace itch_butler_gui
             if (comboBox1.SelectedIndex < 0)
             {
                 listBox1.BackColor = Color.Pink;
-                AddLog("Error: no profile selected.");
+                AddLog("Error: no game profile selected.");
                 return;
             }
 

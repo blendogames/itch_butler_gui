@@ -79,14 +79,14 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(71, 20);
+            this.comboBox1.Location = new System.Drawing.Point(88, 20);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(698, 32);
+            this.comboBox1.Size = new System.Drawing.Size(681, 32);
             this.comboBox1.TabIndex = 10;
             // 
             // menuStrip1
@@ -117,8 +117,8 @@
             // addNewProjectProfileToolStripMenuItem
             // 
             this.addNewProjectProfileToolStripMenuItem.Name = "addNewProjectProfileToolStripMenuItem";
-            this.addNewProjectProfileToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.addNewProjectProfileToolStripMenuItem.Text = "Add new profile";
+            this.addNewProjectProfileToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.addNewProjectProfileToolStripMenuItem.Text = "Add new game profile";
             this.addNewProjectProfileToolStripMenuItem.Click += new System.EventHandler(this.addNewProjectProfileToolStripMenuItem_Click);
             // 
             // profileManagementToolStripMenuItem
@@ -129,7 +129,7 @@
             this.toolStripMenuItem4,
             this.deleteCurrentProfileToolStripMenuItem});
             this.profileManagementToolStripMenuItem.Name = "profileManagementToolStripMenuItem";
-            this.profileManagementToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.profileManagementToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.profileManagementToolStripMenuItem.Text = "Profile management";
             // 
             // renameCurrentProfileToolStripMenuItem
@@ -161,7 +161,7 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(179, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(188, 6);
             // 
             // logToolStripMenuItem
             // 
@@ -170,7 +170,7 @@
             this.copyLineToolStripMenuItem,
             this.clearToolStripMenuItem});
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.logToolStripMenuItem.Text = "Log";
             // 
             // copyAllToolStripMenuItem
@@ -206,7 +206,7 @@
             this.toolStripMenuItem1,
             this.executeCommandToolStripMenuItem});
             this.butlerToolStripMenuItem.Name = "butlerToolStripMenuItem";
-            this.butlerToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.butlerToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.butlerToolStripMenuItem.Text = "Butler";
             // 
             // commandlineArgumentsToolStripMenuItem
@@ -264,28 +264,28 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(179, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(188, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.exitToolStripMenuItem.Text = "Save changes + exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnCheckmark,
@@ -344,9 +344,9 @@
             // 
             // listBox1
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 3);
@@ -358,8 +358,8 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(13, 594);
             this.button1.Name = "button1";
@@ -374,15 +374,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Profile:";
+            this.label1.Text = "Game profile:";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(13, 106);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -401,15 +401,15 @@
             // 
             // textBox_username
             // 
-            this.textBox_username.Location = new System.Drawing.Point(71, 71);
+            this.textBox_username.Location = new System.Drawing.Point(88, 71);
             this.textBox_username.Name = "textBox_username";
-            this.textBox_username.Size = new System.Drawing.Size(250, 20);
+            this.textBox_username.Size = new System.Drawing.Size(233, 20);
             this.textBox_username.TabIndex = 15;
             // 
             // textBox_gamename
             // 
-            this.textBox_gamename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_gamename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_gamename.Location = new System.Drawing.Point(419, 71);
             this.textBox_gamename.Name = "textBox_gamename";
             this.textBox_gamename.Size = new System.Drawing.Size(350, 20);
